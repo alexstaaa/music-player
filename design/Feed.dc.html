@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;family=Unbounded:wght@500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; background: #16171b; }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; } a:hover { text-decoration: underline; }
+    svg { display: block; flex-shrink: 0; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; display: grid; grid-template-columns: 240px minmax(0, 1fr); background: {{t.bg}}; color: {{t.text}}; font-variant-numeric: tabular-nums;">
+
+  <aside style="display: flex; flex-direction: column; gap: 28px; padding: 24px 14px; border-right: 1px solid {{t.line}}; background: {{t.side}};">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 6px 12px;">
+      <div style="display: flex; align-items: center; gap: 3px; height: 24px;">
+        <div style="width: 4px; height: 10px; border-radius: 2px; background: {{a.fill}};"></div>
+        <div style="width: 4px; height: 18px; border-radius: 2px; background: {{a.fill}};"></div>
+        <div style="width: 4px; height: 24px; border-radius: 2px; background: {{a.fill}};"></div>
+        <div style="width: 4px; height: 14px; border-radius: 2px; background: {{a.fill}};"></div>
+        <div style="width: 4px; height: 20px; border-radius: 2px; background: {{a.fill}};"></div>
+      </div>
+      <span style="font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -0.02em;">[Название]</span>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <div style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; font-weight: 500; {{navActive}}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"></path></svg>
+        <span>Лента</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; font-weight: 500; {{navIdle}}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+        <span>Поиск</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; font-weight: 500; {{navIdle}}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4v16M9.5 4v16M14 5l5 14.5"></path></svg>
+        <span>Библиотека</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; font-weight: 500; {{navIdle}}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15"></path></svg>
+        <span>Загрузить</span>
+      </div>
+    </nav>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="padding: 0 12px 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{t.text3}};">Плейлисты</div>
+      <sc-for list="{{playlists}}" as="p" hint-placeholder-count="3">
+        <div style="display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14px; color: {{t.text2}};">
+          <div style="width: 24px; height: 24px; border-radius: 6px; background: {{p.cover}};"></div>
+          <span>{{p.name}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px;">
+      <div style="width: 32px; height: 32px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; {{meAv}}">В</div>
+      <span style="font-size: 14px; font-weight: 500; flex-grow: 1;">Мой профиль</span>
+      <div style="display: flex; gap: 2px; padding: 2px; border-radius: 8px; background: {{t.raised}}; font-size: 11px; font-weight: 600;">
+        <span style="padding: 3px 6px; border-radius: 6px; background: {{t.panel}}; color: {{t.text}};">RU</span>
+        <span style="padding: 3px 6px; color: {{t.text3}};">EN</span>
+      </div>
+    </div>
+  </aside>
+
+  <main style="display: flex; flex-direction: column; gap: 24px; padding: 24px 40px 0; min-width: 0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px; width: 380px; height: 40px; padding: 0 12px; border-radius: 12px; background: {{t.raised}}; color: {{t.text3}}; font-size: 14px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+        <span style="flex-grow: 1;">Треки, артисты, плейлисты</span>
+        <span style="padding: 1px 7px; border-radius: 6px; border: 1px solid {{t.line}}; font-size: 12px;">/</span>
+      </div>
+      <div style="flex-grow: 1;"></div>
+      <div style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px 0 12px; border-radius: 999px; background: {{t.raised}}; font-size: 14px; font-weight: 600;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15"></path></svg>
+        <span>Загрузить</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+          <h1 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 32px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 600;">Лента</h1>
+          <div style="display: flex; gap: 8px; font-size: 14px; font-weight: 500;">
+            <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: {{t.text}}; color: {{t.bg}};">Всё</span>
+            <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: {{t.raised}}; color: {{t.text2}};">Треки</span>
+            <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: {{t.raised}}; color: {{t.text2}};">Репосты</span>
+            <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: {{t.raised}}; color: {{t.text2}};">Плейлисты</span>
+          </div>
+        </div>
+
+        <sc-for list="{{cards}}" as="c" hint-placeholder-count="3">
+          <div style="display: flex; gap: 20px; padding: 16px; border-radius: 20px; background: {{c.bg}};">
+            <div style="position: relative; width: 132px; height: 132px; border-radius: 14px; flex-shrink: 0; background: {{c.cover}};">
+              <div style="position: absolute; left: 10px; bottom: 10px; width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; {{c.btn}}">
+                <sc-if value="{{c.playing}}" hint-placeholder-val="{{ false }}">
+                  <svg width="16" height="16" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect></svg>
+                </sc-if>
+                <sc-if value="{{c.paused}}" hint-placeholder-val="{{ true }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>
+                </sc-if>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0; flex-grow: 1;">
+              <div style="display: flex; flex-direction: column; gap: 3px;">
+                <sc-if value="{{c.repost}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: {{t.text3}};">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5 20 6.5l-3 3M20 6.5H8a4 4 0 0 0-4 4V12M7 20.5l-3-3 3-3M4 17.5h12a4 4 0 0 0 4-4V12"></path></svg>
+                    <span>{{c.repost}}</span>
+                  </div>
+                </sc-if>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: {{t.text2}};">
+                  <span>{{c.artist}}</span>
+                  <span style="color: {{t.text3}};">· {{c.ago}}</span>
+                </div>
+                <span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em;">{{c.title}}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 2px; height: 44px;">
+                <sc-for list="{{c.wave}}" as="b" hint-placeholder-count="120">
+                  <div style="flex: 1 1 0; min-width: 0; border-radius: 1.5px; height: {{b.h}}px; background: {{b.c}};"></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: {{t.text2}};">
+                <span style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 999px; border: 1px solid {{t.line}};">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"></path></svg>
+                  {{c.likes}}
+                </span>
+                <span style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 999px; border: 1px solid {{t.line}};">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5 20 6.5l-3 3M20 6.5H8a4 4 0 0 0-4 4V12M7 20.5l-3-3 3-3M4 17.5h12a4 4 0 0 0 4-4V12"></path></svg>
+                  {{c.reposts}}
+                </span>
+                <span style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 999px; border: 1px solid {{t.line}};">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-11 6.6L4 19.5l1.4-4.5A7.5 7.5 0 1 1 20 11.5z"></path></svg>
+                  {{c.comments}}
+                </span>
+                <div style="flex-grow: 1;"></div>
+                <span style="color: {{t.text3}};">{{c.plays}} · {{c.len}}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px; border-radius: 20px; background: {{t.panel}}; border: 1px solid {{t.line}};">
+          <span style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">В тренде</span>
+          <sc-for list="{{trending}}" as="r" hint-placeholder-count="5">
+            <div style="display: flex; align-items: center; gap: 12px; height: 52px;">
+              <span style="width: 16px; font-size: 13px; font-weight: 600; color: {{t.text3}};">{{r.n}}</span>
+              <div style="width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; background: {{r.cover}};"></div>
+              <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0; flex-grow: 1;">
+                <span style="font-size: 14px; font-weight: 600;">{{r.title}}</span>
+                <span style="font-size: 12px; color: {{t.text2}};">{{r.artist}}</span>
+              </div>
+              <span style="font-size: 12px; color: {{t.text3}};">{{r.plays}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 20px; border-radius: 20px; background: {{t.panel}}; border: 1px solid {{t.line}};">
+          <span style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">Кого послушать</span>
+          <sc-for list="{{artists}}" as="p" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 12px; height: 56px;">
+              <div style="width: 44px; height: 44px; border-radius: 999px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; {{p.av}}">{{p.i}}</div>
+              <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0; flex-grow: 1;">
+                <span style="font-size: 14px; font-weight: 600;">{{p.name}}</span>
+                <span style="font-size: 12px; color: {{t.text2}};">{{p.followers}}</span>
+              </div>
+              <span style="display: flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; {{p.btn}}">{{p.label}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div style="position: absolute; left: 256px; right: 16px; bottom: 16px; height: 76px; padding: 0 16px; border-radius: 20px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 24px; box-shadow: {{t.float}};">
+    <span data-glass="20" data-glass-edge="18" data-glass-scale="40" style="position: absolute; inset: 0; border-radius: 20px; pointer-events: none; background: {{t.glass}}; backdrop-filter: blur(8px) saturate(180%); -webkit-backdrop-filter: blur(8px) saturate(180%);"></span>
+    <span style="position: absolute; inset: 0; padding: 1.5px; border-radius: 20px; pointer-events: none; background: {{t.rim}}; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+    <div style="position: relative; display: flex; align-items: center; gap: 12px; min-width: 0;">
+      <div style="width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0; background: {{heroCover}};"></div>
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+        <span style="font-size: 14px; font-weight: 600;">Полночный трамвай</span>
+        <span style="font-size: 13px; color: {{t.text2}};">Лиса Ветрова</span>
+      </div>
+      <div style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: {{a.text}};">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"></path></svg>
+      </div>
+    </div>
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+      <div style="display: flex; align-items: center; gap: 18px;">
+        <div style="color: {{t.text2}};"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7h3.2a4 4 0 0 1 3.3 1.8l4 6.4a4 4 0 0 0 3.3 1.8h3.2M18 14.5l2.5 2.5-2.5 2.5M3.5 17h3.2a4 4 0 0 0 3.3-1.8M14 8.8A4 4 0 0 1 17.3 7h3.2M18 4.5 20.5 7 18 9.5"></path></svg></div>
+        <div><svg width="20" height="20" viewBox="0 0 24 24"><path d="M18 6.2v11.6a.8.8 0 0 1-1.2.7L8.5 13a1.1 1.1 0 0 1 0-2l8.3-5.5a.8.8 0 0 1 1.2.7z" fill="currentColor"></path><rect x="5" y="5.5" width="2.2" height="13" rx="1.1" fill="currentColor"></rect></svg></div>
+        <div style="width: 40px; height: 40px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: {{t.text}}; color: {{t.bg}};">
+          <svg width="16" height="16" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect></svg>
+        </div>
+        <div><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 6.2v11.6a.8.8 0 0 0 1.2.7l8.3-5.5a1.1 1.1 0 0 0 0-2L7.2 5.5A.8.8 0 0 0 6 6.2z" fill="currentColor"></path><rect x="16.8" y="5.5" width="2.2" height="13" rx="1.1" fill="currentColor"></rect></svg></div>
+        <div style="color: {{t.text2}};"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5 20 6.5l-3 3M20 6.5H8a4 4 0 0 0-4 4V12M7 20.5l-3-3 3-3M4 17.5h12a4 4 0 0 0 4-4V12"></path></svg></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; width: 100%; font-size: 11px; color: {{t.text3}};">
+        <span>1:24</span>
+        <div style="position: relative; height: 4px; flex-grow: 1; border-radius: 2px; background: {{t.track}};">
+          <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 36.2%; border-radius: 2px; background: {{a.wave}};"></div>
+        </div>
+        <span>3:52</span>
+      </div>
+    </div>
+    <div style="position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 14px; color: {{t.text2}};">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h10M17.5 14.5v6l3.5-3z"></path></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3l4.5-4v13L7 14.5H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"></path></svg>
+      <div style="position: relative; width: 96px; height: 4px; border-radius: 2px; background: {{t.track}};">
+        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 70%; border-radius: 2px; background: {{t.text2}};"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"palette":{"editor":"enum","options":["lime","iris","coral"],"default":"lime"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  theme() {
+    var light = (this.props.theme ?? 'dark') === 'light';
+    var t = light ? {
+      bg: 'oklch(0.978 0.003 275)', side: 'oklch(0.958 0.004 275)', panel: 'oklch(1 0 0)', raised: 'oklch(0.94 0.005 275)',
+      text: 'oklch(0.2 0.012 275)', text2: 'oklch(0.44 0.012 275)', text3: 'oklch(0.58 0.01 275)',
+      line: 'oklch(0.25 0.02 275 / 0.09)', wave: 'oklch(0.25 0.02 275 / 0.2)', track: 'oklch(0.25 0.02 275 / 0.12)',
+      glass: 'oklch(0.995 0.002 275 / 0.5)', glassEdge: 'oklch(1 0 0 / 0.85)',
+      float: '0 18px 48px oklch(0.3 0.03 275 / 0.16)', coverShadow: '0 24px 50px oklch(0.3 0.04 275 / 0.24)',
+      rim: 'linear-gradient(135deg, oklch(1 0 0 / 0.95) 0%, oklch(1 0 0 / 0.3) 40%, oklch(0.3 0.02 275 / 0.14) 70%, oklch(1 0 0 / 0.95) 100%)'
+    } : {
+      bg: 'oklch(0.16 0.005 275)', side: 'oklch(0.14 0.005 275)', panel: 'oklch(0.2 0.006 275)', raised: 'oklch(0.24 0.007 275)',
+      text: 'oklch(0.97 0.003 275)', text2: 'oklch(0.76 0.008 275)', text3: 'oklch(0.58 0.008 275)',
+      line: 'oklch(1 0 0 / 0.08)', wave: 'oklch(1 0 0 / 0.2)', track: 'oklch(1 0 0 / 0.14)',
+      glass: 'oklch(0.22 0.006 275 / 0.45)', glassEdge: 'oklch(1 0 0 / 0.1)',
+      float: '0 18px 48px oklch(0 0 0 / 0.5)', coverShadow: '0 24px 60px oklch(0 0 0 / 0.55)',
+      rim: 'linear-gradient(135deg, oklch(1 0 0 / 0) 0%, oklch(1 0 0 / 0.22) 33%, oklch(1 0 0 / 0.5) 66%, oklch(1 0 0 / 0) 100%)'
+    };
+    var P = {
+      lime: { dark: ['oklch(0.9 0.2 128)', 'oklch(0.24 0.06 128)', 'oklch(0.9 0.2 128)'], light: ['oklch(0.87 0.21 128)', 'oklch(0.24 0.06 128)', 'oklch(0.55 0.16 134)'] },
+      iris: { dark: ['oklch(0.74 0.14 285)', 'oklch(0.2 0.05 285)', 'oklch(0.78 0.13 285)'], light: ['oklch(0.54 0.17 285)', 'oklch(0.99 0.005 285)', 'oklch(0.5 0.17 285)'] },
+      coral: { dark: ['oklch(0.75 0.15 32)', 'oklch(0.2 0.05 32)', 'oklch(0.78 0.14 32)'], light: ['oklch(0.63 0.19 32)', 'oklch(0.99 0.005 32)', 'oklch(0.56 0.18 32)'] }
+    };
+    var p = P[this.props.palette ?? 'lime'] || P.lime;
+    var v = light ? p.light : p.dark;
+    var a = {
+      fill: v[0], on: v[1], text: v[2], wave: light ? v[2] : v[0],
+      soft: v[2].replace(')', ' / 0.14)'), glow: v[0].replace(')', light ? ' / 0.22)' : ' / 0.1)')
+    };
+    return { t: t, a: a, light: light };
+  }
+  bars(n, seed, frac, on, off, maxH) {
+    var out = [], s = seed;
+    for (var i = 0; i < n; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      var r = s / 233280, x = i / n;
+      var env = 0.35 + 0.65 * Math.abs(Math.sin(x * Math.PI * 1.6 + 0.35)) * (0.75 + 0.25 * Math.sin(x * 23));
+      out.push({ h: Math.max(3, Math.round(maxH * env * (0.45 + 0.55 * r))), c: x < frac ? on : off });
+    }
+    return out;
+  }
+  cover(h1, h2) {
+    return 'radial-gradient(110% 90% at 18% 12%, oklch(0.82 0.13 ' + h1 + ') 0%, transparent 60%), radial-gradient(90% 100% at 90% 95%, oklch(0.5 0.17 ' + h2 + ') 0%, transparent 65%), oklch(0.3 0.08 ' + h2 + ')';
+  }
+  av(h) {
+    return 'background: oklch(0.8 0.08 ' + h + '); color: oklch(0.28 0.06 ' + h + ');';
+  }
+  componentDidMount() { this.applyGlass(); }
+  componentDidUpdate() { this.applyGlass(); }
+  // Liquid glass: edge refraction = SVG displacement map over backdrop-filter
+  // (approach from rdev/liquid-glass-react, MIT). Chromium only; Safari/Firefox keep the plain blur.
+  applyGlass() {
+    var ua = navigator.userAgent;
+    if (!/Chrome\//.test(ua) || /Firefox\//.test(ua)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-transparency: reduce)').matches) return;
+    var self = this;
+    requestAnimationFrame(function () {
+      var host = document.getElementById('lg-defs');
+      if (!host) {
+        host = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        host.setAttribute('id', 'lg-defs');
+        host.setAttribute('width', '0');
+        host.setAttribute('height', '0');
+        host.setAttribute('aria-hidden', 'true');
+        host.style.position = 'absolute';
+        document.body.appendChild(host);
+      }
+      var els = document.querySelectorAll('[data-glass]');
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
+        if (!w || !h) continue;
+        var r = Math.min(parseFloat(el.getAttribute('data-glass')) || 0, w / 2, h / 2);
+        var edge = Math.min(parseFloat(el.getAttribute('data-glass-edge')) || 16, w / 2, h / 2);
+        var scale = parseFloat(el.getAttribute('data-glass-scale')) || 36;
+        var id = ['lg', w, h, Math.round(r), Math.round(edge), Math.round(scale)].join('-');
+        if (!document.getElementById(id)) {
+          var url = self.glassMap(w, h, r, edge);
+          var ch = function (name, k, m) {
+            return '<feDisplacementMap in="SourceGraphic" in2="map" scale="' + (scale * k).toFixed(1) + '" xChannelSelector="R" yChannelSelector="G" result="d' + name + '"></feDisplacementMap>' +
+              '<feColorMatrix in="d' + name + '" type="matrix" values="' + m + '" result="' + name + '"></feColorMatrix>';
+          };
+          host.insertAdjacentHTML('beforeend',
+            '<filter id="' + id + '" x="0" y="0" width="' + w + '" height="' + h + '" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">' +
+            '<feImage href="' + url + '" x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" result="map"></feImage>' +
+            ch('r', 1, '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+            ch('g', 0.95, '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+            ch('b', 0.9, '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
+            '<feBlend in="r" in2="g" mode="screen" result="rg"></feBlend>' +
+            '<feBlend in="rg" in2="b" mode="screen"></feBlend>' +
+            '</filter>');
+        }
+        el.style.filter = 'url(#' + id + ')';
+      }
+    });
+  }
+  glassMap(w, h, r, edge) {
+    var c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    var ctx = c.getContext('2d'), img = ctx.createImageData(w, h), d = img.data;
+    var hw = w / 2, hh = h / 2;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var px = x + 0.5 - hw, py = y + 0.5 - hh;
+        var qx = Math.abs(px) - (hw - r), qy = Math.abs(py) - (hh - r);
+        var sd = Math.min(Math.max(qx, qy), 0) + Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) - r;
+        var dist = Math.max(-sd, 0), nx = 0, ny = 0;
+        if (qx > 0 && qy > 0) { var L = Math.hypot(qx, qy) || 1; nx = qx / L; ny = qy / L; }
+        else if (qx > qy) { nx = 1; } else { ny = 1; }
+        nx *= px < 0 ? -1 : 1; ny *= py < 0 ? -1 : 1;
+        var k = dist < edge ? Math.pow(1 - dist / edge, 2) : 0;
+        var o = (y * w + x) * 4;
+        d[o] = Math.round(127.5 - nx * k * 127);
+        d[o + 1] = Math.round(127.5 - ny * k * 127);
+        d[o + 2] = 128;
+        d[o + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    return c.toDataURL();
+  }
+  renderVals() {
+    var th = this.theme(), t = th.t, a = th.a;
+    var glassBtn = 'background: ' + t.glass + '; color: ' + t.text + '; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);';
+    return {
+      t: t, a: a,
+      navActive: 'background: ' + t.raised + '; color: ' + t.text + ';',
+      navIdle: 'color: ' + t.text2 + ';',
+      heroCover: this.cover(190, 300),
+      meAv: this.av(250),
+      playlists: [
+        { name: 'Для дороги', cover: this.cover(60, 20) },
+        { name: 'Ночной фокус', cover: this.cover(240, 280) },
+        { name: 'Любимое', cover: this.cover(340, 10) }
+      ],
+      cards: [
+        { title: 'Полночный трамвай', artist: 'Лиса Ветрова', ago: '3 дня', repost: '', likes: '1,2 тыс.', reposts: '184', comments: '38', plays: '24,8 тыс.', len: '3:52',
+          cover: this.cover(190, 300), bg: t.panel, playing: true, paused: false, btn: 'background: ' + a.fill + '; color: ' + a.on + ';',
+          wave: this.bars(120, 7, 0.362, a.wave, t.wave, 44) },
+        { title: 'Стеклянный дождь', artist: 'Нори', ago: '5 ч', repost: 'Кирилл сделал репост', likes: '860', reposts: '72', comments: '15', plays: '48 тыс.', len: '4:18',
+          cover: this.cover(210, 250), bg: 'transparent', playing: false, paused: true, btn: glassBtn,
+          wave: this.bars(120, 31, 0, a.wave, t.wave, 44) },
+        { title: 'Сигнал из подвала', artist: 'ТЕПЛО', ago: '1 д', repost: '', likes: '312', reposts: '20', comments: '9', plays: '12 тыс.', len: '2:47',
+          cover: this.cover(30, 350), bg: 'transparent', playing: false, paused: true, btn: glassBtn,
+          wave: this.bars(120, 113, 0, a.wave, t.wave, 44) }
+      ],
+      trending: [
+        { n: '1', title: 'Южный ветер', artist: 'Aster Lane', plays: '210 тыс.', cover: this.cover(100, 160) },
+        { n: '2', title: 'Стеклянный дождь', artist: 'Нори', plays: '48 тыс.', cover: this.cover(210, 250) },
+        { n: '3', title: 'Без сна', artist: 'Лиса Ветрова', plays: '33 тыс.', cover: this.cover(280, 320) },
+        { n: '4', title: 'Плёнка', artist: 'Оса', plays: '29 тыс.', cover: this.cover(70, 40) },
+        { n: '5', title: 'Сигнал из подвала', artist: 'ТЕПЛО', plays: '12 тыс.', cover: this.cover(30, 350) }
+      ],
+      artists: [
+        { i: 'Н', name: 'Нори', followers: '8,4 тыс. подписчиков', av: this.av(210), label: 'Подписаться', btn: 'background: ' + t.text + '; color: ' + t.bg + ';' },
+        { i: 'О', name: 'Оса', followers: '2,1 тыс. подписчиков', av: this.av(70), label: 'Подписаться', btn: 'background: ' + t.text + '; color: ' + t.bg + ';' },
+        { i: 'A', name: 'Aster Lane', followers: '51 тыс. подписчиков', av: this.av(130), label: 'Вы подписаны', btn: 'background: ' + t.raised + '; color: ' + t.text2 + ';' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

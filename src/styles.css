@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "@fontsource-variable/onest";
+@import "@fontsource-variable/unbounded";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---- Design tokens (source: design/Tokens.dc.html) ---- */
+:root {
+  --bg: oklch(0.978 0.003 275);
+  --side: oklch(0.958 0.004 275);
+  --panel: oklch(1 0 0);
+  --raised: oklch(0.94 0.005 275);
+  --fg: oklch(0.2 0.012 275);
+  --fg-2: oklch(0.44 0.012 275);
+  --fg-3: oklch(0.58 0.01 275);
+  --line: oklch(0.25 0.02 275 / 0.09);
+  --wave: oklch(0.25 0.02 275 / 0.2);
+  --track: oklch(0.25 0.02 275 / 0.12);
+
+  --accent: oklch(0.87 0.21 128);
+  --on-accent: oklch(0.24 0.06 128);
+  --accent-fg: oklch(0.55 0.16 134);
+  --accent-soft: oklch(0.55 0.16 134 / 0.14);
+  --accent-glow: oklch(0.87 0.21 128 / 0.22);
+
+  --glass: oklch(0.995 0.002 275 / 0.5);
+  --rim: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0.95) 0%,
+    oklch(1 0 0 / 0.3) 40%,
+    oklch(0.3 0.02 275 / 0.14) 70%,
+    oklch(1 0 0 / 0.95) 100%
+  );
+  --shadow-float: 0 18px 48px oklch(0.3 0.03 275 / 0.16);
+  --shadow-cover: 0 24px 50px oklch(0.3 0.04 275 / 0.24);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: oklch(0.16 0.005 275);
+  --side: oklch(0.14 0.005 275);
+  --panel: oklch(0.2 0.006 275);
+  --raised: oklch(0.24 0.007 275);
+  --fg: oklch(0.97 0.003 275);
+  --fg-2: oklch(0.76 0.008 275);
+  --fg-3: oklch(0.58 0.008 275);
+  --line: oklch(1 0 0 / 0.08);
+  --wave: oklch(1 0 0 / 0.2);
+  --track: oklch(1 0 0 / 0.14);
+
+  --accent: oklch(0.9 0.2 128);
+  --on-accent: oklch(0.24 0.06 128);
+  --accent-fg: oklch(0.9 0.2 128);
+  --accent-soft: oklch(0.9 0.2 128 / 0.14);
+  --accent-glow: oklch(0.9 0.2 128 / 0.1);
+
+  --glass: oklch(0.22 0.006 275 / 0.45);
+  --rim: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0) 0%,
+    oklch(1 0 0 / 0.22) 33%,
+    oklch(1 0 0 / 0.5) 66%,
+    oklch(1 0 0 / 0) 100%
+  );
+  --shadow-float: 0 18px 48px oklch(0 0 0 / 0.5);
+  --shadow-cover: 0 24px 60px oklch(0 0 0 / 0.55);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-side: var(--side);
+  --color-panel: var(--panel);
+  --color-raised: var(--raised);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-line: var(--line);
+  --color-wave: var(--wave);
+  --color-track: var(--track);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --shadow-float: var(--shadow-float);
+  --shadow-cover: var(--shadow-cover);
+}
+
+@theme {
+  --font-sans: "Onest Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Unbounded Variable", "Onest Variable", system-ui, sans-serif;
+  --ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root {
+  --sidebar-w: 240px;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+    transition: background-color 200ms ease;
+  }
+  body {
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent-fg);
+    outline-offset: 2px;
+  }
+}
+
+/* Press feedback: on pointer-down, 0.97, fast ease-out. */
+@utility press {
+  transition: transform 140ms var(--ease-snap);
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility display-tight {
+  font-family: var(--font-display);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+@utility overline {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* ---- Liquid glass (see components/LiquidGlass.tsx) ---- */
+@layer base {
+  .glass {
+    position: relative;
+  }
+  /* Content siblings paint above the absolutely positioned glass layers; utilities can still override. */
+  .glass > :where(:not(.glass__layer, .glass__rim)) {
+    position: relative;
+  }
+}
+.glass__layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--glass);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+.glass__rim {
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--rim);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass__layer {
+    background: var(--panel);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press:active {
+    transform: none;
+  }
+}

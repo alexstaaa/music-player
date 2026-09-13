@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;family=Unbounded:wght@500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; background: oklch(0.978 0.003 275); }
+    * { box-sizing: border-box; }
+    a { color: oklch(0.5 0.17 285); text-decoration: none; } a:hover { text-decoration: underline; }
+    svg { display: block; flex-shrink: 0; }
+    code { font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace; font-size: 12px; }
+  </style>
+</helmet>
+<div style="width: 1440px; min-height: 2860px; display: flex; flex-direction: column; gap: 80px; padding: 72px 80px 96px; background: oklch(0.978 0.003 275); color: oklch(0.2 0.012 275); font-variant-numeric: tabular-nums;">
+
+  <header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.58 0.01 275);">Черновик · v0.1</span>
+      <h1 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 56px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600;">Дизайн-система</h1>
+      <p style="margin: 0; max-width: 620px; font-size: 17px; line-height: 1.5; color: oklch(0.44 0.012 275); text-wrap: pretty;">Тёмная и светлая темы, RU/EN. Спокойные нейтрали, один акцент, стеклянные слои поверх контента и сдержанное движение.</p>
+    </div>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Акцент: три направления</h2>
+      <p style="margin: 0; font-size: 15px; color: oklch(0.44 0.012 275);">Акцент один на всё: кнопка Play, сыгранная часть волны, таймкоды и лайки. Остальной интерфейс нейтральный.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <sc-for list="{{palettes}}" as="s" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 18px; padding: 24px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <span style="font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 22px; letter-spacing: -0.02em; font-weight: 600;">{{s.name}}</span>
+            <code style="color: oklch(0.58 0.01 275);">{{s.value}}</code>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.45;">
+            <span style="color: oklch(0.3 0.012 275);">{{s.mood}}</span>
+            <span style="color: oklch(0.52 0.01 275);">{{s.minus}}</span>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 0; min-width: 0; padding: 16px; border-radius: 16px; background: {{s.d.bg}}; color: {{s.d.text}};">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: {{s.d.fill}}; color: {{s.d.on}};">
+                  <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>
+                </div>
+                <div style="display: flex; flex-direction: column; min-width: 0;">
+                  <span style="font-size: 13px; font-weight: 600;">Тёмная</span>
+                  <span style="font-size: 12px; color: {{s.d.text2}};">3:52</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 2px; height: 32px;">
+                <sc-for list="{{s.d.bars}}" as="b" hint-placeholder-count="36">
+                  <div style="flex: 1 1 0; min-width: 0; border-radius: 1px; height: {{b.h}}px; background: {{b.c}};"></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; gap: 6px; font-size: 12px; font-weight: 600;">
+                <span style="padding: 2px 8px; border-radius: 6px; background: {{s.d.soft}}; color: {{s.d.atext}};">1:24</span>
+                <span style="padding: 2px 8px; border-radius: 999px; background: {{s.d.soft}}; color: {{s.d.atext}};">♥ 1,2 тыс.</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 0; min-width: 0; padding: 16px; border-radius: 16px; background: {{s.l.bg}}; color: {{s.l.text}}; border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: {{s.l.fill}}; color: {{s.l.on}};">
+                  <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>
+                </div>
+                <div style="display: flex; flex-direction: column; min-width: 0;">
+                  <span style="font-size: 13px; font-weight: 600;">Светлая</span>
+                  <span style="font-size: 12px; color: {{s.l.text2}};">3:52</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 2px; height: 32px;">
+                <sc-for list="{{s.l.bars}}" as="b" hint-placeholder-count="36">
+                  <div style="flex: 1 1 0; min-width: 0; border-radius: 1px; height: {{b.h}}px; background: {{b.c}};"></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; gap: 6px; font-size: 12px; font-weight: 600;">
+                <span style="padding: 2px 8px; border-radius: 6px; background: {{s.l.soft}}; color: {{s.l.atext}};">1:24</span>
+                <span style="padding: 2px 8px; border-radius: 999px; background: {{s.l.soft}}; color: {{s.l.atext}};">♥ 1,2 тыс.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Нейтрали</h2>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <sc-for list="{{neutrals}}" as="row" hint-placeholder-count="2">
+        <div style="display: grid; grid-template-columns: 120px repeat(8, minmax(0, 1fr)); gap: 12px; align-items: start;">
+          <span style="padding-top: 26px; font-size: 14px; font-weight: 600;">{{row.name}}</span>
+          <sc-for list="{{row.items}}" as="n" hint-placeholder-count="8">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="height: 72px; border-radius: 12px; border: 1px solid oklch(0.25 0.02 275 / 0.1); background: {{n.v}};"></div>
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-size: 13px; font-weight: 600;">{{n.name}}</span>
+                <code style="color: oklch(0.58 0.01 275); font-size: 11px;">{{n.v}}</code>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Типографика</h2>
+      <p style="margin: 0; font-size: 15px; color: oklch(0.44 0.012 275);">Unbounded для заголовков, Onest для интерфейса, оба с кириллицей. Крупный текст сжат по трекингу, мелкий разрежен; цифры моноширинные.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 22px; padding: 28px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Display · 56 / 1.02 / −0.035em · 600</code>
+          <span style="font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 56px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600;">Без сна</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Title · 32 / 1.1 / −0.03em · 600</code>
+          <span style="font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 32px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 600;">Полночный трамвай</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Heading · 22 / 1.2 / −0.02em · 600</code>
+          <span style="font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600;">Похожие треки</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 22px; padding: 28px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Body L · 17 / 1.5 / 0 · 400</code>
+          <span style="font-size: 17px; line-height: 1.5;">Звучит как ночной город из окна автобуса.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Body · 15 / 1.45 / 0 · 400–600</code>
+          <span style="font-size: 15px; line-height: 1.45;"><strong style="font-weight: 600;">Лиса Ветрова</strong> · 24,8 тыс. прослушиваний</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Caption · 13 / 1.4 / +0.005em · 500</code>
+          <span style="font-size: 13px; line-height: 1.4; letter-spacing: 0.005em; font-weight: 500; color: oklch(0.44 0.012 275);">Кирилл сделал репост · 5 ч</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <code style="color: oklch(0.58 0.01 275);">Overline · 12 / 1 / +0.08em · 600 · UPPER</code>
+          <span style="font-size: 12px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: oklch(0.58 0.01 275);">Трек · Электроника</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Материал: жидкое стекло</h2>
+      <p style="margin: 0; max-width: 820px; font-size: 15px; line-height: 1.5; color: oklch(0.44 0.012 275);">Только на плавающих слоях: плеер, шит «Сейчас играет», поповеры. Контент прокручивается под ними. Стекло не кладём на стекло.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px;">
+      <div style="position: relative; height: 300px; border-radius: 24px; overflow: hidden; background: radial-gradient(60% 90% at 15% 20%, oklch(0.82 0.13 190) 0%, transparent 60%), radial-gradient(50% 80% at 80% 30%, oklch(0.7 0.17 330) 0%, transparent 60%), radial-gradient(70% 90% at 60% 110%, oklch(0.85 0.19 128) 0%, transparent 60%), oklch(0.3 0.08 290);">
+        <div style="position: absolute; left: 32px; right: 32px; top: 40px; display: flex; align-items: center; gap: 3px; height: 120px;">
+          <sc-for list="{{glassWave}}" as="b" hint-placeholder-count="80">
+            <div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: oklch(1 0 0 / 0.55);"></div>
+          </sc-for>
+        </div>
+        <div style="position: absolute; left: 40px; right: 40px; bottom: 36px; height: 76px; border-radius: 999px; display: flex; align-items: center; gap: 14px; padding: 0 12px; background: oklch(0.22 0.006 275 / 0.35); backdrop-filter: blur(14px) saturate(180%); -webkit-backdrop-filter: blur(14px) saturate(180%); box-shadow: 0 18px 48px oklch(0 0 0 / 0.35); color: oklch(0.99 0 0);">
+          <span style="position: absolute; inset: 0; padding: 1.5px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.1) 0%, oklch(1 0 0 / 0.35) 33%, oklch(1 0 0 / 0.75) 66%, oklch(1 0 0 / 0.1) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <div style="width: 52px; height: 52px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128); color: oklch(0.24 0.06 128);">
+            <svg width="20" height="20" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"></rect></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; text-shadow: 0 1px 8px oklch(0 0 0 / 0.3);">
+            <span style="font-size: 15px; font-weight: 600;">Полночный трамвай</span>
+            <span style="font-size: 13px; opacity: 0.85;">Лиса Ветрова · 1:24 / 3:52</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0; border-radius: 24px; overflow: hidden; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <sc-for list="{{glassRows}}" as="g" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 18px 22px; border-bottom: 1px solid oklch(0.25 0.02 275 / 0.07);">
+            <span style="font-size: 14px; font-weight: 600;">{{g.k}}</span>
+            <span style="font-size: 14px; line-height: 1.45; color: oklch(0.44 0.012 275);">{{g.v}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 20px;">
+      <sc-for list="{{radii}}" as="r" hint-placeholder-count="6">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div style="width: 88px; height: 64px; background: oklch(0.94 0.005 275); border: 1px solid oklch(0.25 0.02 275 / 0.12); border-radius: {{r.v}};"></div>
+          <code style="color: oklch(0.44 0.012 275);">{{r.label}}</code>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Движение</h2>
+      <p style="margin: 0; max-width: 820px; font-size: 15px; line-height: 1.5; color: oklch(0.44 0.012 275);">Быстрое и прерываемое. То, что тянут пальцем, двигается на пружинах. Горячие клавиши и частые действия без анимации.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <div style="display: flex; gap: 20px; align-items: center; padding: 24px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <svg width="120" height="120" viewBox="-4 -4 128 128" fill="none"><rect x="0" y="0" width="120" height="120" rx="8" stroke="oklch(0.25 0.02 275 / 0.1)"></rect><path d="M0 120 C27.6 0 38.4 0 120 0" stroke="oklch(0.55 0.16 134)" stroke-width="3" stroke-linecap="round"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 16px; font-weight: 600;">ease-out</span>
+          <code style="color: oklch(0.58 0.01 275);">cubic-bezier(0.23, 1, 0.32, 1)</code>
+          <span style="font-size: 14px; color: oklch(0.44 0.012 275);">Появление, нажатия, поповеры</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center; padding: 24px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <svg width="120" height="120" viewBox="-4 -4 128 128" fill="none"><rect x="0" y="0" width="120" height="120" rx="8" stroke="oklch(0.25 0.02 275 / 0.1)"></rect><path d="M0 120 C92.4 120 21 0 120 0" stroke="oklch(0.55 0.16 134)" stroke-width="3" stroke-linecap="round"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 16px; font-weight: 600;">ease-in-out</span>
+          <code style="color: oklch(0.58 0.01 275);">cubic-bezier(0.77, 0, 0.175, 1)</code>
+          <span style="font-size: 14px; color: oklch(0.44 0.012 275);">Перемещение по экрану</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center; padding: 24px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <svg width="120" height="120" viewBox="-4 -4 128 128" fill="none"><rect x="0" y="0" width="120" height="120" rx="8" stroke="oklch(0.25 0.02 275 / 0.1)"></rect><path d="M0 120 C38.4 33.6 0 0 120 0" stroke="oklch(0.55 0.16 134)" stroke-width="3" stroke-linecap="round"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 16px; font-weight: 600;">drawer</span>
+          <code style="color: oklch(0.58 0.01 275);">cubic-bezier(0.32, 0.72, 0, 1)</code>
+          <span style="font-size: 14px; color: oklch(0.44 0.012 275);">Шиты без жеста</span>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+      <sc-for list="{{motion}}" as="m" hint-placeholder-count="7">
+        <div style="display: grid; grid-template-columns: 260px 320px minmax(0, 1fr); gap: 24px; align-items: center; padding: 16px 24px; border-bottom: 1px solid oklch(0.25 0.02 275 / 0.07);">
+          <span style="font-size: 15px; font-weight: 600;">{{m.what}}</span>
+          <code style="color: oklch(0.3 0.012 275);">{{m.how}}</code>
+          <span style="font-size: 14px; color: oklch(0.44 0.012 275);">{{m.why}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px;">
+    <h2 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; letter-spacing: -0.03em; font-weight: 600;">Базовые компоненты</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 20px; padding: 28px; border-radius: 24px; background: oklch(0.16 0.005 275); color: oklch(0.97 0.003 275);">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px 0 16px; border-radius: 999px; background: oklch(0.9 0.2 128); color: oklch(0.24 0.06 128); font-size: 15px; font-weight: 600;">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>
+            <span>Слушать</span>
+          </div>
+          <div style="display: flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: oklch(0.97 0.003 275); color: oklch(0.16 0.005 275); font-size: 15px; font-weight: 600;">Подписаться</div>
+          <div style="display: flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: oklch(0.24 0.007 275); font-size: 15px; font-weight: 600;">Вы подписаны</div>
+          <div style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: oklch(0.24 0.007 275);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14.5V4M8 7.5 12 3.5l4 4M7 11H6a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1"></path></svg>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; font-weight: 500;">
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.97 0.003 275); color: oklch(0.16 0.005 275);">Всё</span>
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.24 0.007 275); color: oklch(0.76 0.008 275);">Треки</span>
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.24 0.007 275); color: oklch(0.76 0.008 275);">Репосты</span>
+          <span style="display: flex; align-items: center; height: 26px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 600; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128);">1:24</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 12px; background: oklch(0.24 0.007 275); color: oklch(0.58 0.008 275); font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+          <span>Треки, артисты, плейлисты</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px; padding: 28px; border-radius: 24px; background: oklch(1 0 0); border: 1px solid oklch(0.25 0.02 275 / 0.09);">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px 0 16px; border-radius: 999px; background: oklch(0.87 0.21 128); color: oklch(0.24 0.06 128); font-size: 15px; font-weight: 600;">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>
+            <span>Слушать</span>
+          </div>
+          <div style="display: flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: oklch(0.2 0.012 275); color: oklch(0.99 0 0); font-size: 15px; font-weight: 600;">Подписаться</div>
+          <div style="display: flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: oklch(0.94 0.005 275); font-size: 15px; font-weight: 600;">Вы подписаны</div>
+          <div style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: oklch(0.94 0.005 275);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14.5V4M8 7.5 12 3.5l4 4M7 11H6a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1"></path></svg>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; font-weight: 500;">
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.2 0.012 275); color: oklch(0.99 0 0);">Всё</span>
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.94 0.005 275); color: oklch(0.44 0.012 275);">Треки</span>
+          <span style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: oklch(0.94 0.005 275); color: oklch(0.44 0.012 275);">Репосты</span>
+          <span style="display: flex; align-items: center; height: 26px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 600; background: oklch(0.55 0.16 134 / 0.14); color: oklch(0.5 0.15 134);">1:24</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 12px; background: oklch(0.94 0.005 275); color: oklch(0.58 0.01 275); font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+          <span>Треки, артисты, плейлисты</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  bars(n, seed, frac, on, off, maxH) {
+    var out = [], s = seed;
+    for (var i = 0; i < n; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      var r = s / 233280, x = i / n;
+      var env = 0.35 + 0.65 * Math.abs(Math.sin(x * Math.PI * 1.6 + 0.35)) * (0.75 + 0.25 * Math.sin(x * 23));
+      out.push({ h: Math.max(3, Math.round(maxH * env * (0.45 + 0.55 * r))), c: x < frac ? on : off });
+    }
+    return out;
+  }
+  tile(light, fill, on, atext) {
+    var wave = light ? atext : fill;
+    var rest = light ? 'oklch(0.25 0.02 275 / 0.2)' : 'oklch(1 0 0 / 0.2)';
+    return {
+      bg: light ? 'oklch(0.978 0.003 275)' : 'oklch(0.16 0.005 275)',
+      text: light ? 'oklch(0.2 0.012 275)' : 'oklch(0.97 0.003 275)',
+      text2: light ? 'oklch(0.44 0.012 275)' : 'oklch(0.76 0.008 275)',
+      fill: fill, on: on, atext: atext, soft: atext.replace(')', ' / 0.14)'),
+      bars: this.bars(36, 7, 0.4, wave, rest, 32)
+    };
+  }
+  renderVals() {
+    return {
+      palettes: [
+        { name: 'Лайм', value: 'oklch(0.9 0.2 128)',
+          mood: 'Клубный, дерзкий, сразу запоминается. Дальше всех от оранжевого SoundCloud.',
+          minus: 'Минус: в светлой теме текст и волну приходится темнить до оливкового.',
+          d: this.tile(false, 'oklch(0.9 0.2 128)', 'oklch(0.24 0.06 128)', 'oklch(0.9 0.2 128)'),
+          l: this.tile(true, 'oklch(0.87 0.21 128)', 'oklch(0.24 0.06 128)', 'oklch(0.55 0.16 134)') },
+        { name: 'Ирис', value: 'oklch(0.74 0.14 285)',
+          mood: 'Спокойный, технологичный, одинаково хорошо смотрится в обеих темах.',
+          minus: 'Минус: фиолетовый акцент встречается часто, характера меньше.',
+          d: this.tile(false, 'oklch(0.74 0.14 285)', 'oklch(0.2 0.05 285)', 'oklch(0.78 0.13 285)'),
+          l: this.tile(true, 'oklch(0.54 0.17 285)', 'oklch(0.99 0.005 285)', 'oklch(0.5 0.17 285)') },
+        { name: 'Коралл', value: 'oklch(0.75 0.15 32)',
+          mood: 'Тёплый и эмоциональный, отсылает к винилу и живому звуку.',
+          minus: 'Минус: ближе всех к фирменному оранжевому SoundCloud.',
+          d: this.tile(false, 'oklch(0.75 0.15 32)', 'oklch(0.2 0.05 32)', 'oklch(0.78 0.14 32)'),
+          l: this.tile(true, 'oklch(0.63 0.19 32)', 'oklch(0.99 0.005 32)', 'oklch(0.56 0.18 32)') }
+      ],
+      neutrals: [
+        { name: 'Тёмная', items: [
+          { name: 'bg', v: 'oklch(0.16 0.005 275)' }, { name: 'sidebar', v: 'oklch(0.14 0.005 275)' },
+          { name: 'panel', v: 'oklch(0.2 0.006 275)' }, { name: 'raised', v: 'oklch(0.24 0.007 275)' },
+          { name: 'text', v: 'oklch(0.97 0.003 275)' }, { name: 'text-2', v: 'oklch(0.76 0.008 275)' },
+          { name: 'text-3', v: 'oklch(0.58 0.008 275)' }, { name: 'line', v: 'oklch(1 0 0 / 0.08)' } ] },
+        { name: 'Светлая', items: [
+          { name: 'bg', v: 'oklch(0.978 0.003 275)' }, { name: 'sidebar', v: 'oklch(0.958 0.004 275)' },
+          { name: 'panel', v: 'oklch(1 0 0)' }, { name: 'raised', v: 'oklch(0.94 0.005 275)' },
+          { name: 'text', v: 'oklch(0.2 0.012 275)' }, { name: 'text-2', v: 'oklch(0.44 0.012 275)' },
+          { name: 'text-3', v: 'oklch(0.58 0.01 275)' }, { name: 'line', v: 'oklch(0.25 0.02 275 / 0.09)' } ] }
+      ],
+      glassWave: this.bars(80, 19, 0, '', '', 120),
+      glassRows: [
+        { k: 'Chrome, Edge', v: 'Преломление по краям: SVG feDisplacementMap + backdrop-filter, лёгкая хроматическая аберрация, блик кромки следует за курсором.' },
+        { k: 'Safari, Firefox', v: 'Без преломления: blur(24px) saturate(180%) и светлая кромка 1.5px.' },
+        { k: 'Меньше прозрачности', v: 'prefers-reduced-transparency: сплошная подложка panel, без размытия.' },
+        { k: 'Жесты', v: 'Эластичность только у кнопки Play и шита; плеер-бар не тянется за мышью.' }
+      ],
+      radii: [
+        { v: '6px', label: '6 · чип' }, { v: '10px', label: '10 · обложка S' }, { v: '12px', label: '12 · поле' },
+        { v: '14px', label: '14 · обложка M' }, { v: '20px', label: '20 · карточка' }, { v: '24px', label: '24 · обложка L' },
+        { v: '999px', label: 'pill · кнопки' }
+      ],
+      motion: [
+        { what: 'Нажатие на кнопку', how: 'scale(0.97) · 140ms · ease-out', why: 'На pointerdown, не на click' },
+        { what: 'Поповер, меню', how: 'scale(0.96)+opacity · 180ms', why: 'Растёт от кнопки-триггера' },
+        { what: 'Перемотка по волне', how: '1:1, без анимации', why: 'Волна прямо следует за пальцем' },
+        { what: 'Шит «Сейчас играет»', how: 'spring · bounce 0 · 0.4s', why: 'После флика bounce 0.2 и проекция импульса' },
+        { what: 'Переход между страницами', how: 'View Transitions · 240ms', why: 'Обложка перелетает из ленты в трек' },
+        { what: 'Появление списков', how: 'stagger 40ms · translateY(8px)', why: 'Только при первой загрузке' },
+        { what: 'Reduced motion', how: 'opacity · 200ms', why: 'Без сдвигов и пружин' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

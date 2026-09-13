@@ -1,0 +1,8 @@
+node_modules
+dist
+src/paraglide
+*.local
+.DS_Store
+# seeded design canvas (2 MB, regenerated from design/*.dc.html)
+design/*.html
+!design/*.dc.html

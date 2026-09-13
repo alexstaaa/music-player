@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;family=Unbounded:wght@500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; background: oklch(0.13 0.005 275); }
+    * { box-sizing: border-box; }
+    a { color: oklch(0.9 0.2 128); text-decoration: none; } a:hover { text-decoration: underline; }
+    svg { display: block; flex-shrink: 0; }
+  </style>
+</helmet>
+<div style="width: 1440px; min-height: 2200px; display: flex; flex-direction: column; gap: 24px; padding: 64px 80px 80px; background: oklch(0.13 0.005 275); color: oklch(0.97 0.003 275); font-variant-numeric: tabular-nums;">
+
+  <header style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+    <h1 style="margin: 0; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 40px; line-height: 1.05; letter-spacing: -0.035em; font-weight: 600;">Время и прогресс: варианты</h1>
+    <p style="margin: 0; max-width: 860px; font-size: 16px; line-height: 1.5; color: oklch(0.76 0.008 275);">Слева страница трека, справа мобильный экран. Жидкое стекло с преломлением работает в Chrome и Edge, в Safari и Firefox вместо него обычное размытие.</p>
+  </header>
+
+  <!-- A -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">A</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Подписи по краям · как сейчас</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">Привычно и ничего не перекрывает. Но цифры мелкие и далеко от плейхеда, взгляд прыгает между ними.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px;">
+        <div style="position: relative; height: 72px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{desk}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -4px; width: 2px; height: 80px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; font-weight: 500; color: oklch(0.58 0.008 275);"><span style="color: oklch(0.9 0.2 128);">1:24</span><span>3:52</span></div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px;">
+        <div style="position: relative; height: 48px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{mob}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; font-weight: 500; color: oklch(0.58 0.008 275);"><span style="color: oklch(0.9 0.2 128);">1:24</span><span>−2:28</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">B</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Капсула на плейхеде</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">Текущее время едет над плейхедом в стеклянной капсуле, при наведении рядом всплывает вторая с временем под курсором. Время там, куда смотришь, удобно перематывать. Минус: над волной нужен запас по высоте.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px; padding-top: 46px;">
+        <div style="position: relative; height: 72px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{desk}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -8px; width: 2px; height: 88px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+          <div style="position: absolute; left: 58%; top: -8px; width: 1px; height: 88px; background: oklch(1 0 0 / 0.4);"></div>
+        </div>
+        <div style="position: absolute; left: 36.2%; top: 0; transform: translateX(-50%); display: flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.35);">
+          <span data-glass="16" data-glass-edge="12" data-glass-scale="20" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.4); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.9 0.2 128);">1:24</span>
+        </div>
+        <div style="position: absolute; left: 58%; top: 4px; transform: translateX(-50%); display: flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600;">
+          <span data-glass="13" data-glass-edge="10" data-glass-scale="16" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.4); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.3) 35%, oklch(1 0 0 / 0.6) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.76 0.008 275);">2:15</span>
+        </div>
+        <div style="position: absolute; right: -6px; top: 82px; transform: translateY(-50%); display: flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600;">
+          <span data-glass="13" data-glass-edge="10" data-glass-scale="16" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.4); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.3) 35%, oklch(1 0 0 / 0.6) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.76 0.008 275);">3:52</span>
+        </div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px; padding-top: 42px;">
+        <div style="position: relative; height: 48px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{mob}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -8px; width: 2px; height: 64px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+        </div>
+        <div style="position: absolute; left: 36.2%; top: 0; transform: translateX(-50%); display: flex; align-items: center; height: 30px; padding: 0 11px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.35);">
+          <span data-glass="15" data-glass-edge="11" data-glass-scale="18" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.4); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.9 0.2 128);">1:24</span>
+        </div>
+        <div style="position: absolute; right: -6px; top: 66px; transform: translateY(-50%); display: flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600;">
+          <span data-glass="13" data-glass-edge="10" data-glass-scale="16" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.4); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.3) 35%, oklch(1 0 0 / 0.6) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.76 0.008 275);">−2:28</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">C</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Стеклянные чипы на волне</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">Чипы лежат прямо на барах по краям волны. Компактно, и стекло здесь заметнее всего: бары преломляются в кромке. Минус: чипы закрывают начало и конец волны.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px;">
+        <div style="position: relative; height: 72px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{desk}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -4px; width: 2px; height: 80px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+        </div>
+        <div style="position: absolute; left: 6px; top: 36px; transform: translateY(-50%); display: flex; align-items: center; height: 34px; padding: 0 13px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.3);">
+          <span data-glass="17" data-glass-edge="13" data-glass-scale="26" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.3); backdrop-filter: blur(2px) saturate(180%); -webkit-backdrop-filter: blur(2px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.97 0.003 275); text-shadow: 0 1px 6px oklch(0 0 0 / 0.5);">1:24</span>
+        </div>
+        <div style="position: absolute; right: 6px; top: 36px; transform: translateY(-50%); display: flex; align-items: center; height: 34px; padding: 0 13px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.3);">
+          <span data-glass="17" data-glass-edge="13" data-glass-scale="26" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.3); backdrop-filter: blur(2px) saturate(180%); -webkit-backdrop-filter: blur(2px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.85 0.006 275); text-shadow: 0 1px 6px oklch(0 0 0 / 0.5);">3:52</span>
+        </div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px;">
+        <div style="position: relative; height: 56px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{mobTall}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+        </div>
+        <div style="position: absolute; left: 4px; top: 28px; transform: translateY(-50%); display: flex; align-items: center; height: 30px; padding: 0 11px; border-radius: 999px; font-size: 13px; font-weight: 600;">
+          <span data-glass="15" data-glass-edge="11" data-glass-scale="22" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.3); backdrop-filter: blur(2px) saturate(180%); -webkit-backdrop-filter: blur(2px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; text-shadow: 0 1px 6px oklch(0 0 0 / 0.5);">1:24</span>
+        </div>
+        <div style="position: absolute; right: 4px; top: 28px; transform: translateY(-50%); display: flex; align-items: center; height: 30px; padding: 0 11px; border-radius: 999px; font-size: 13px; font-weight: 600;">
+          <span data-glass="15" data-glass-edge="11" data-glass-scale="22" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.3); backdrop-filter: blur(2px) saturate(180%); -webkit-backdrop-filter: blur(2px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.85 0.006 275); text-shadow: 0 1px 6px oklch(0 0 0 / 0.5);">−2:28</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">D</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Крупный счётчик и отражение</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">Большие цифры «прошло / осталось» над волной, волна растёт от базовой линии и отражается вниз. Выразительно, хорошо для страницы трека и мобилы. Минус: занимает высоту, в ленту не подходит.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 40px; line-height: 1; letter-spacing: -0.03em; font-weight: 600;">
+          <span style="color: oklch(0.9 0.2 128);">1:24</span>
+          <span style="color: oklch(0.5 0.008 275);">−2:28</span>
+        </div>
+        <div style="position: relative; height: 64px; display: flex; align-items: flex-end; gap: 2px;">
+          <sc-for list="{{deskD}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px 2px 1px 1px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -4px; width: 2px; height: 94px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+        </div>
+        <div style="height: 24px; margin-top: 3px; overflow: hidden; opacity: 0.3; -webkit-mask-image: linear-gradient(180deg, #000, transparent); mask-image: linear-gradient(180deg, #000, transparent);">
+          <div style="height: 64px; display: flex; align-items: flex-start; gap: 2px;">
+            <sc-for list="{{deskD}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 1px 1px 2px 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 28px; line-height: 1; letter-spacing: -0.03em; font-weight: 600;">
+          <span style="color: oklch(0.9 0.2 128);">1:24</span>
+          <span style="color: oklch(0.5 0.008 275);">−2:28</span>
+        </div>
+        <div style="position: relative; height: 44px; display: flex; align-items: flex-end; gap: 2px;">
+          <sc-for list="{{mobD}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px 2px 1px 1px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+        </div>
+        <div style="height: 16px; margin-top: 3px; overflow: hidden; opacity: 0.3; -webkit-mask-image: linear-gradient(180deg, #000, transparent); mask-image: linear-gradient(180deg, #000, transparent);">
+          <div style="height: 44px; display: flex; align-items: flex-start; gap: 2px;">
+            <sc-for list="{{mobD}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 1px 1px 2px 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">E</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Капсула из жидкого стекла</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">Волна и время внутри одной стеклянной капсулы поверх цветов обложки, сыгранная часть подсвечена изнутри. Самый «Liquid Glass» вариант. Минус: волна мельче, а стеклу нужен цветной фон под ним.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px; height: 132px; display: flex; align-items: center; padding: 0 28px; border-radius: 20px; overflow: hidden; background: radial-gradient(40% 120% at 12% 30%, oklch(0.75 0.14 190) 0%, transparent 70%), radial-gradient(40% 120% at 66% 85%, oklch(0.55 0.18 300) 0%, transparent 70%), radial-gradient(30% 90% at 94% 10%, oklch(0.85 0.19 128 / 0.8) 0%, transparent 70%), oklch(0.25 0.05 290);">
+        <div style="position: relative; flex-grow: 1; height: 64px; display: flex; align-items: center; gap: 16px; padding: 0 22px; border-radius: 999px; box-shadow: 0 14px 40px oklch(0 0 0 / 0.35);">
+          <span data-glass="32" data-glass-edge="20" data-glass-scale="44" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.2 0.01 275 / 0.3); backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%);"></span>
+          <span style="position: absolute; left: 0; top: 0; bottom: 0; width: 38%; border-radius: 999px 0 0 999px; pointer-events: none; background: linear-gradient(90deg, oklch(0.9 0.2 128 / 0.04), oklch(0.9 0.2 128 / 0.2));"></span>
+          <span style="position: absolute; inset: 0; padding: 1.5px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.1) 0%, oklch(1 0 0 / 0.35) 33%, oklch(1 0 0 / 0.75) 66%, oklch(1 0 0 / 0.1) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; font-size: 14px; font-weight: 600; color: oklch(0.93 0.18 128); text-shadow: 0 1px 8px oklch(0 0 0 / 0.45);">1:24</span>
+          <div style="position: relative; flex-grow: 1; height: 36px; display: flex; align-items: center; gap: 2px;">
+            <sc-for list="{{eDesk}}" as="b" hint-placeholder-count="110"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          </div>
+          <span style="position: relative; font-size: 14px; font-weight: 600; text-shadow: 0 1px 8px oklch(0 0 0 / 0.45);">3:52</span>
+        </div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px; height: 132px; display: flex; align-items: center; padding: 0 14px; border-radius: 20px; overflow: hidden; background: radial-gradient(60% 120% at 10% 20%, oklch(0.75 0.14 190) 0%, transparent 70%), radial-gradient(60% 120% at 90% 90%, oklch(0.55 0.18 300) 0%, transparent 70%), oklch(0.25 0.05 290);">
+        <div style="position: relative; flex-grow: 1; height: 56px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border-radius: 999px; box-shadow: 0 12px 32px oklch(0 0 0 / 0.35);">
+          <span data-glass="28" data-glass-edge="18" data-glass-scale="38" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.2 0.01 275 / 0.3); backdrop-filter: blur(6px) saturate(180%); -webkit-backdrop-filter: blur(6px) saturate(180%);"></span>
+          <span style="position: absolute; left: 0; top: 0; bottom: 0; width: 40%; border-radius: 999px 0 0 999px; pointer-events: none; background: linear-gradient(90deg, oklch(0.9 0.2 128 / 0.04), oklch(0.9 0.2 128 / 0.2));"></span>
+          <span style="position: absolute; inset: 0; padding: 1.5px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.1) 0%, oklch(1 0 0 / 0.35) 33%, oklch(1 0 0 / 0.75) 66%, oklch(1 0 0 / 0.1) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; font-size: 12px; font-weight: 600; color: oklch(0.93 0.18 128); text-shadow: 0 1px 8px oklch(0 0 0 / 0.45);">1:24</span>
+          <div style="position: relative; flex-grow: 1; height: 28px; display: flex; align-items: center; gap: 2px;">
+            <sc-for list="{{eMob}}" as="b" hint-placeholder-count="40"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          </div>
+          <span style="position: relative; font-size: 12px; font-weight: 600; text-shadow: 0 1px 8px oklch(0 0 0 / 0.45);">3:52</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F -->
+  <section style="display: flex; flex-direction: column; gap: 22px; padding: 28px 32px 34px; border-radius: 28px; background: oklch(0.17 0.006 275); border: 1px solid oklch(1 0 0 / 0.06);">
+    <div style="display: flex; align-items: flex-start; gap: 18px;">
+      <span style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: oklch(0.9 0.2 128 / 0.14); color: oklch(0.9 0.2 128); font-family: 'Unbounded', 'Onest', system-ui, sans-serif; font-size: 17px; font-weight: 600;">F</span>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 18px; font-weight: 600;">Цифры по требованию</span>
+        <span style="font-size: 14px; line-height: 1.45; color: oklch(0.76 0.008 275);">В покое только волна, длительность в строке с автором. Время и число комментариев под курсором всплывают при наведении или перемотке, на мобиле при касании. Максимально чисто. Минус: позицию не видно, пока не наведёшь.</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="position: relative; width: 780px; padding-top: 50px;">
+        <div style="position: absolute; left: 0; top: 0; font-size: 13px; color: oklch(0.58 0.008 275);">Лиса Ветрова · 3:52</div>
+        <div style="position: relative; height: 72px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{desk}}" as="b" hint-placeholder-count="150"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 58%; top: -6px; width: 1px; height: 84px; background: oklch(1 0 0 / 0.55);"></div>
+        </div>
+        <div style="position: absolute; left: 58%; top: 2px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.35);">
+          <span data-glass="17" data-glass-edge="13" data-glass-scale="22" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.45); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative;">2:15</span>
+          <span style="position: relative; display: flex; align-items: center; gap: 5px; color: oklch(0.76 0.008 275);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-11 6.6L4 19.5l1.4-4.5A7.5 7.5 0 1 1 20 11.5z"></path></svg>
+            3
+          </span>
+        </div>
+      </div>
+      <div style="width: 1px; align-self: stretch; background: oklch(1 0 0 / 0.08);"></div>
+      <div style="position: relative; width: 342px; padding-top: 50px;">
+        <div style="position: relative; height: 48px; display: flex; align-items: center; gap: 2px;">
+          <sc-for list="{{mob}}" as="b" hint-placeholder-count="60"><div style="flex: 1 1 0; min-width: 0; border-radius: 2px; height: {{b.h}}px; background: {{b.c}};"></div></sc-for>
+          <div style="position: absolute; left: 36.2%; top: -6px; width: 2px; height: 60px; border-radius: 1px; background: oklch(0.97 0.003 275);"></div>
+        </div>
+        <div style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; height: 38px; padding: 0 16px; border-radius: 999px; font-size: 15px; font-weight: 600; box-shadow: 0 8px 20px oklch(0 0 0 / 0.35);">
+          <span data-glass="19" data-glass-edge="14" data-glass-scale="24" style="position: absolute; inset: 0; border-radius: 999px; pointer-events: none; background: oklch(0.25 0.01 275 / 0.45); backdrop-filter: blur(3px) saturate(180%); -webkit-backdrop-filter: blur(3px) saturate(180%);"></span>
+          <span style="position: absolute; inset: 0; padding: 1px; border-radius: 999px; pointer-events: none; background: linear-gradient(135deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.35) 35%, oklch(1 0 0 / 0.7) 65%, oklch(1 0 0 / 0.05) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></span>
+          <span style="position: relative; color: oklch(0.9 0.2 128);">1:24</span>
+          <span style="position: relative; color: oklch(0.58 0.008 275);">/ 3:52</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { this.applyGlass(); }
+  componentDidUpdate() { this.applyGlass(); }
+  // Liquid glass: edge refraction = SVG displacement map over backdrop-filter
+  // (approach from rdev/liquid-glass-react, MIT). Chromium only; Safari/Firefox keep the plain blur.
+  applyGlass() {
+    var ua = navigator.userAgent;
+    if (!/Chrome\//.test(ua) || /Firefox\//.test(ua)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-transparency: reduce)').matches) return;
+    var self = this;
+    requestAnimationFrame(function () {
+      var host = document.getElementById('lg-defs');
+      if (!host) {
+        host = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        host.setAttribute('id', 'lg-defs');
+        host.setAttribute('width', '0');
+        host.setAttribute('height', '0');
+        host.setAttribute('aria-hidden', 'true');
+        host.style.position = 'absolute';
+        document.body.appendChild(host);
+      }
+      var els = document.querySelectorAll('[data-glass]');
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
+        if (!w || !h) continue;
+        var r = Math.min(parseFloat(el.getAttribute('data-glass')) || 0, w / 2, h / 2);
+        var edge = Math.min(parseFloat(el.getAttribute('data-glass-edge')) || 16, w / 2, h / 2);
+        var scale = parseFloat(el.getAttribute('data-glass-scale')) || 36;
+        var id = ['lg', w, h, Math.round(r), Math.round(edge), Math.round(scale)].join('-');
+        if (!document.getElementById(id)) {
+          var url = self.glassMap(w, h, r, edge);
+          var ch = function (name, k, m) {
+            return '<feDisplacementMap in="SourceGraphic" in2="map" scale="' + (scale * k).toFixed(1) + '" xChannelSelector="R" yChannelSelector="G" result="d' + name + '"></feDisplacementMap>' +
+              '<feColorMatrix in="d' + name + '" type="matrix" values="' + m + '" result="' + name + '"></feColorMatrix>';
+          };
+          host.insertAdjacentHTML('beforeend',
+            '<filter id="' + id + '" x="0" y="0" width="' + w + '" height="' + h + '" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">' +
+            '<feImage href="' + url + '" x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" result="map"></feImage>' +
+            ch('r', 1, '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+            ch('g', 0.95, '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+            ch('b', 0.9, '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
+            '<feBlend in="r" in2="g" mode="screen" result="rg"></feBlend>' +
+            '<feBlend in="rg" in2="b" mode="screen"></feBlend>' +
+            '</filter>');
+        }
+        el.style.filter = 'url(#' + id + ')';
+      }
+    });
+  }
+  glassMap(w, h, r, edge) {
+    var c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    var ctx = c.getContext('2d'), img = ctx.createImageData(w, h), d = img.data;
+    var hw = w / 2, hh = h / 2;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var px = x + 0.5 - hw, py = y + 0.5 - hh;
+        var qx = Math.abs(px) - (hw - r), qy = Math.abs(py) - (hh - r);
+        var sd = Math.min(Math.max(qx, qy), 0) + Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) - r;
+        var dist = Math.max(-sd, 0), nx = 0, ny = 0;
+        if (qx > 0 && qy > 0) { var L = Math.hypot(qx, qy) || 1; nx = qx / L; ny = qy / L; }
+        else if (qx > qy) { nx = 1; } else { ny = 1; }
+        nx *= px < 0 ? -1 : 1; ny *= py < 0 ? -1 : 1;
+        var k = dist < edge ? Math.pow(1 - dist / edge, 2) : 0;
+        var o = (y * w + x) * 4;
+        d[o] = Math.round(127.5 - nx * k * 127);
+        d[o + 1] = Math.round(127.5 - ny * k * 127);
+        d[o + 2] = 128;
+        d[o + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    return c.toDataURL();
+  }
+  bars(n, seed, frac, on, off, maxH) {
+    var out = [], s = seed;
+    for (var i = 0; i < n; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      var r = s / 233280, x = i / n;
+      var env = 0.35 + 0.65 * Math.abs(Math.sin(x * Math.PI * 1.6 + 0.35)) * (0.75 + 0.25 * Math.sin(x * 23));
+      out.push({ h: Math.max(3, Math.round(maxH * env * (0.45 + 0.55 * r))), c: x < frac ? on : off });
+    }
+    return out;
+  }
+  renderVals() {
+    var lime = 'oklch(0.9 0.2 128)', rest = 'oklch(1 0 0 / 0.2)';
+    return {
+      desk: this.bars(150, 7, 0.362, lime, rest, 72),
+      mob: this.bars(60, 7, 0.362, lime, rest, 48),
+      mobTall: this.bars(60, 7, 0.362, lime, rest, 56),
+      deskD: this.bars(150, 7, 0.362, lime, rest, 64),
+      mobD: this.bars(60, 7, 0.362, lime, rest, 44),
+      eDesk: this.bars(110, 7, 0.362, 'oklch(0.93 0.18 128)', 'oklch(1 0 0 / 0.45)', 36),
+      eMob: this.bars(40, 7, 0.38, 'oklch(0.93 0.18 128)', 'oklch(1 0 0 / 0.45)', 28)
+    };
+  }
+}
+</script>
+</body>
+</html>
