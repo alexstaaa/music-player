@@ -46,7 +46,8 @@ export function LiquidGlass({ radius, edge = 16, refraction = 36, className, chi
 
   return (
     <div className={clsx('glass', className)} {...rest}>
-      <span ref={layerRef} className="glass__layer" />
+      {/* clip-path runs after filter, so the displaced backdrop keeps the rounded shape. */}
+      <span ref={layerRef} className="glass__layer" style={{ clipPath: `inset(0 round ${radius}px)` }} />
       <span className="glass__rim" />
       {children}
     </div>

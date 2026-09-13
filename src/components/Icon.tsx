@@ -35,6 +35,30 @@ const stroke = {
     </>
   ),
   chevronDown: <path d="m6 9.5 6 6 6-6" />,
+  chevronRight: <path d="m9.5 6 6 6-6 6" />,
+  plus: <path d="M12 5v14M5 12h14" />,
+  minus: <path d="M5 12h14" />,
+  close: <path d="M6 6l12 12M18 6 6 18" />,
+  user: (
+    <>
+      <circle cx="12" cy="8.5" r="3.5" />
+      <path d="M5 20a7 7 0 0 1 14 0" />
+    </>
+  ),
+  link: (
+    <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
+  ),
+  trash: <path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v5.5M14 11v5.5" />,
+  mute: <path d="M4 9.5h3l4.5-4v13L7 14.5H4zM16 9.5l5 5M21 9.5l-5 5" />,
+  edit: <path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16zM13.5 6.5l4 4" />,
+  music: (
+    <>
+      <path d="M9 18V5.5l11-2V16" />
+      <circle cx="6.5" cy="18" r="2.5" />
+      <circle cx="17.5" cy="16" r="2.5" />
+    </>
+  ),
+  keyboard: <path d="M3.5 6.5h17v11h-17zM7 10h.01M10.5 10h.01M14 10h.01M17 10h.01M8 14h8" />,
 }
 
 const fill = {

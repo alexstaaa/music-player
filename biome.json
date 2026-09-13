@@ -20,7 +20,8 @@
     "rules": {
       "recommended": true,
       "suspicious": { "noArrayIndexKey": "off" },
-      "complexity": { "noImportantStyles": "off" }
+      "complexity": { "noImportantStyles": "off" },
+      "a11y": { "noAutofocus": "off", "useSemanticElements": "off" }
     }
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } }

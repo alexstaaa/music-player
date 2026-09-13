@@ -1,6 +1,7 @@
 // Liquid glass refraction: a displacement map of a rounded rect, fed to an SVG
 // feDisplacementMap that is applied as `filter` on an element with backdrop-filter.
-// Approach adapted from rdev/liquid-glass-react (MIT). Only Chromium renders the
+// Approach adapted from rdev/liquid-glass-react (MIT), minus its per-channel
+// chromatic aberration: splitting channels breaks semi-transparent (light) glass. Only Chromium renders the
 // displaced backdrop; other engines keep the plain blur.
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
@@ -73,10 +74,6 @@ function defsHost(): SVGSVGElement {
   return host
 }
 
-const channel = (name: string, scale: number, matrix: string) => `
-  <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale.toFixed(1)}" xChannelSelector="R" yChannelSelector="G" result="d${name}" />
-  <feColorMatrix in="d${name}" type="matrix" values="${matrix}" result="${name}" />`
-
 /** Creates or updates the filter `id` for the given shape. Returns the CSS filter value. */
 export function upsertGlassFilter(id: string, shape: GlassShape, scale: number): string {
   const { width: w, height: h } = shape
@@ -86,11 +83,7 @@ export function upsertGlassFilter(id: string, shape: GlassShape, scale: number):
     'beforeend',
     `<filter id="${id}" x="0" y="0" width="${w}" height="${h}" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feImage href="${displacementMap(shape)}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="map" />
-      ${channel('r', scale, '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0')}
-      ${channel('g', scale * 0.95, '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0')}
-      ${channel('b', scale * 0.9, '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0')}
-      <feBlend in="r" in2="g" mode="screen" result="rg" />
-      <feBlend in="rg" in2="b" mode="screen" />
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale.toFixed(1)}" xChannelSelector="R" yChannelSelector="G" />
     </filter>`,
   )
   return `url(#${id})`
